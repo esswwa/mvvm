@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using mvvm.Services;
+using Pishi_Wash__Store.ViewModels;
 
 namespace mvvm
 {
@@ -23,6 +24,7 @@ namespace mvvm
             services.AddTransient<SignUpViewModel>();
             services.AddTransient<BrowseProductViewModel>();
             services.AddTransient<BasketInfoViewModel>();
+            services.AddTransient<BrowseAdminViewModel>();
             #endregion
 
             #region Connection
@@ -59,5 +61,6 @@ namespace mvvm
         public SignUpViewModel? SignUpViewModel => _provider?.GetRequiredService<SignUpViewModel>();
         public BrowseProductViewModel? BrowseProductViewModel => _provider?.GetRequiredService<BrowseProductViewModel>();
         public BasketInfoViewModel? BasketInfoViewModel => _provider?.GetRequiredService<BasketInfoViewModel>();
+        public BrowseAdminViewModel? BrowseAdminViewModel => _provider?.GetRequiredService<BrowseAdminViewModel>();
     }
 }

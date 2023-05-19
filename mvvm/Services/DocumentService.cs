@@ -22,13 +22,13 @@ namespace mvvm.Services
                 return ammount;
             };
 
-            PdfWriter writer = new($"Товарный чек от {DateOnly.FromDateTime(DateTime.Now).ToString("D")}.pdf");
+            PdfWriter writer = new($"Товарный чек.pdf");
             PdfDocument pdf = new(writer);
             Document document = new(pdf);
 
             PdfFont comic = PdfFontFactory.CreateFont(@"C:\Windows\Fonts\Arial.ttf", PdfEncodings.IDENTITY_H, PdfFontFactory.EmbeddingStrategy.PREFER_NOT_EMBEDDED);
 
-            var content = new Paragraph($"Пиши Стирай")
+            var content = new Paragraph($"PishiStiray")
                 .SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT)
                 .SetFont(comic)
                 .SetFontSize(12);
@@ -93,13 +93,14 @@ namespace mvvm.Services
                    .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
                    .SetFont(comic)
                    .SetFontSize(14));
-
-
+                table.AddCell(new Paragraph(Products[i].Title)
+                    .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
+                    .SetFont(comic)
+                    .SetFontSize(14));
                 table.AddCell(new Paragraph(Products[i].Description)
                     .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
                     .SetFont(comic)
                     .SetFontSize(14));
-
                 table.AddCell(new Paragraph(Global.CurrentCart.First(c => c.ArticleName.Equals(Products[i].Article)).Count.ToString())
                     .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
                     .SetFont(comic)

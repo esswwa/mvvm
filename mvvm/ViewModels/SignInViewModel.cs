@@ -22,7 +22,20 @@ namespace mvvm.ViewModels
                 if (await _userService.AuthorizationAsync(Username, Password))
                 {
                     ErrorMessageButton = string.Empty;
-                    await Application.Current.Dispatcher.InvokeAsync(async () => _pageService.ChangePage(new BrowseProductPages()));
+                    await Application.Current.Dispatcher.InvokeAsync(async () =>
+                    {
+
+                        if (Settings.Default.RoleName == "Клиент" || Settings.Default.RoleName == "Менеджер")
+                            _pageService.ChangePage(new BrowseProductPages());
+                        else
+                        {
+                            MessageBox.Show("Admin");
+                            _pageService.ChangePage(new BrowseAdminPage());
+                        }
+                            
+
+                    });
+                    
                 }
                 else
                     ErrorMessageButton = "Неверный логин или пароль";

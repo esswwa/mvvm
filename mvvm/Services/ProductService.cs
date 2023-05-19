@@ -57,6 +57,9 @@ namespace mvvm.Services
             return a;
         }
         public async Task<List<Point>> GetPoints() => await _tradeContext.Pickuppoints.AsNoTracking().ToListAsync();
+
+        public async Task SaveChangesAsync() => await _tradeContext.SaveChangesAsync();
+
         public async Task<int> AddOrder(Orderuser order)
         {
             await _tradeContext.Orderusers.AddAsync(order);
