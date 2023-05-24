@@ -119,11 +119,12 @@ public partial class TradeContext : DbContext
 
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
             entity.Property(e => e.OrderCode).HasMaxLength(45);
-            entity.Property(e => e.OrderFio)
-                .HasMaxLength(45)
+            entity.Property(e => e.OrderFIO)
+                .HasMaxLength(100)
                 .HasColumnName("OrderFIO");
             entity.Property(e => e.OrderStatus).HasColumnType("text");
-
+            entity.Property(e => e.OrderCost).HasPrecision(19, 4);
+            entity.Property(e => e.OrderDiscountAmmount).HasPrecision(19, 4);
             entity.HasOne(d => d.OrderPickupPointNavigation).WithMany(p => p.Orderusers)
                 .HasForeignKey(d => d.OrderPickupPoint)
                 .OnDelete(DeleteBehavior.ClientSetNull)

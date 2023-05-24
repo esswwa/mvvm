@@ -101,7 +101,7 @@ namespace mvvm.ViewModels
                 OrderBeginDate = DateOnly.FromDateTime(DateTime.Now),
                 OrderDeliveryDate = DateOnly.FromDateTime(DateTime.Now.AddDays(2)),
                 OrderPickupPoint = SelectedPoint.IdPickupPoint,
-                OrderFio = FullName == "Гость" ? string.Empty : FullName,
+                OrderFIO = FullName == "Гость" ? string.Empty : FullName,
                 OrderCode = code,
                 OrderStatus = "Новый"
             }), await _productService.GetListFullInformation());

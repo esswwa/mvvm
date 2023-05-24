@@ -15,9 +15,13 @@ public partial class Orderuser
 
     public DateOnly? OrderBeginDate { get; set; }
 
-    public string? OrderFio { get; set; }
+    public string OrderFIO { get; set; } = null!;
 
     public int OrderCode { get; set; }
+
+    public float OrderCost { get; set; }
+
+    public float OrderDiscountAmmount { get; set; }
 
     public virtual Pickuppoint OrderPickupPointNavigation { get; set; } = null!;
 

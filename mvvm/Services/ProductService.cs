@@ -91,6 +91,13 @@ namespace mvvm.Services
             return product;
         }
 
+        public async Task<List<Orderuser>> GetOrders()
+        {
+            _tradeContext.Orderusers.ToList();
+            _tradeContext.Products.ToList();
+            return _tradeContext.Orderusers.ToList();
+        }
+
 
     }
 

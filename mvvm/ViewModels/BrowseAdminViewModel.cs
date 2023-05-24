@@ -6,21 +6,16 @@
         private readonly ProductService _productService;
 
         public List<string> Sorts { get; set; } = new() {
-            "По производителю",
-            "По возрастанию (Цена)",
-            "По убыванию (Цена)",
-            "По возрастанию (Скидка)",
-            "По убыванию (Скидка)"
+            "По возрастанию",
+            "По убыванию"
         };
 
 
 
         public List<string> Filters { get; set; } = new() {
-            "Все диапазоны",
-            "Без скидки",
-            "1-5%",
-            "5-9%",
-            "9% и более"
+            "Все диапазоны", 
+            "Новый",
+            "Завершен"
         };
 
         public List<string> OrderFilters { get; set; } = new() {
@@ -28,13 +23,9 @@
             "Завершен" 
         };
 
-        public bool IsEnabledCart { get; set; }
-
-        public List<DbProduct> Products { get; set; }
+        public ObservableCollection<Orderuser> Orders { get; set; }
 
         public DbProduct SelectedProduct { get; set; }
-
-        public ObservableCollection<Orderuser> Orders { get; set; }
 
         public string FullName { get; set; } = Settings.Default.UserName == string.Empty ? "Гость" : $"{Settings.Default.UserSurname} {Settings.Default.UserName} {Settings.Default.UserPatronymic}";
 
@@ -48,23 +39,17 @@
             set { SetValue(value, changedCallback: UpdateProduct); }
         }
 
-
-
         public string SelectedFilter
         {
             get { return GetValue<string>(); }
             set { SetValue(value, changedCallback: UpdateProduct); }
         }
 
-
-
         public string Search
         {
             get { return GetValue<string>(); }
             set { SetValue(value, changedCallback: UpdateProduct); }
         }
-
-
 
         public BrowseAdminViewModel(PageService pageService, ProductService productService)
         {
@@ -73,36 +58,27 @@
             SelectedFilter = "Все диапазоны";
         }
 
-        private void CheckEnabled() => IsEnabledCart = Global.CurrentCart.Any(c => c.ArticleName != null);
 
         private async void UpdateProduct()
         {
-            var currentProduct = await _productService.GetProducts();
-            MaxRecords = currentProduct.Count;
+            var currentOrder = await _productService.GetOrders();
+            MaxRecords = currentOrder.Count;
 
+            
             if (!string.IsNullOrEmpty(SelectedFilter))
             {
                 switch (SelectedFilter)
                 {
-                    case "Без скидки":
-                        currentProduct = currentProduct.Where(p => p.Discount == 0).ToList();
+                    case "Новый":
+                        currentOrder = currentOrder.Where(p => p.OrderStatus == "Новый").ToList();
                         break;
-                    case "1-5%":
-                        currentProduct = currentProduct.Where(p => p.Discount > 0 && p.Discount < 5).ToList();
-                        break;
-                    case "5-9%":
-                        currentProduct = currentProduct.Where(p => p.Discount >= 5 && p.Discount < 9).ToList();
-                        break;
-                    case "9% и более":
-                        currentProduct = currentProduct.Where(p => p.Discount >= 9).ToList();
+                    case "Завершен":
+                        currentOrder = currentOrder.Where(p => p.OrderStatus == "Завершен").ToList();
                         break;
                 }
             }
-
-
-
-            if (!string.IsNullOrEmpty(Search))
-                currentProduct = currentProduct.Where(p => p.Title.ToLower().Contains(Search.ToLower())).ToList();
+            //if (!string.IsNullOrEmpty(Search))
+            //    currentProduct = currentProduct.Where(p => p.Title.ToLower().Contains(Search.ToLower())).ToList();
 
 
 
@@ -110,27 +86,18 @@
             {
                 switch (SelectedSort)
                 {
-                    case "По производителю":
-                        currentProduct = currentProduct.OrderBy(p => p.Manufacturer).ToList();
+                    case "По возрастанию":
+                        currentOrder = currentOrder.OrderBy(p => p.OrderId).ToList();
                         break;
-                    case "По возрастанию (Цена)":
-                        currentProduct = currentProduct.OrderBy(p => p.Price).ToList();
-                        break;
-                    case "По убыванию (Цена)":
-                        currentProduct = currentProduct.OrderByDescending(p => p.Price).ToList();
-                        break;
-                    case "По возрастанию (Скидка)":
-                        currentProduct = currentProduct.OrderBy(p => p.Discount).ToList();
-                        break;
-                    case "По убыванию (Скидка)":
-                        currentProduct = currentProduct.OrderByDescending(p => p.Discount).ToList();
+                    case "По убыванию":
+                        currentOrder = currentOrder.OrderByDescending(p => p.OrderId).ToList();
                         break;
                 }
             }
 
 
-            Records = currentProduct.Count;
-            Products = currentProduct;
+            Records = currentOrder.Count;
+            Orders = new ObservableCollection<Orderuser>(currentOrder);
         }
 
         public DelegateCommand SignOutCommand => new(() =>
@@ -143,9 +110,10 @@
             _pageService.ChangePage(new SingInPage());
         });
 
+
         public DelegateCommand HelpCommand => new(() =>
         {
-            _pageService.ChangePage(new SingInPage());
+           
         });
 
         #region Caterories

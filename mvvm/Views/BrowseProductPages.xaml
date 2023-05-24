@@ -33,7 +33,7 @@
                      VerticalContentAlignment="Bottom"
                      materialDesign:TextFieldAssist.HasClearButton="True"
                      materialDesign:HintAssist.Hint="Поиск"
-                     
+
                      Text="{Binding Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <ComboBox Grid.Column="1"
                       Margin="5"
@@ -103,100 +103,82 @@
 
         <Grid Grid.Row="1">
             <ListView FontFamily="{StaticResource pwsFont}"
-                      ItemsSource="{Binding Orders,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding SelectedOrder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding Products,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       HorizontalContentAlignment="Stretch"
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
                 <ListView.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Редактировать"
-                                  Command="{Binding EditOrderCommand}"/>
+                        <MenuItem Header="Добавить"
+                                  Command="{Binding AddCardToBasket}"/>
                     </ContextMenu>
                 </ListView.ContextMenu>
 
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical"/>
+                        <UniformGrid Columns="2">
+                        </UniformGrid>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <materialDesign:Card Background="{Binding Orderproducts, Converter={StaticResource AdminStringToBrushConverter}}"
+                        <materialDesign:Card Background="{Binding Discount, Converter={StaticResource StringToBrushConverter}}"
                                              Padding="8"
+                                             Height="120"
                                              HorizontalContentAlignment="Stretch">
-                            <TabControl materialDesign:ColorZoneAssist.Mode="Dark">
-                                <TabItem Header="Информация">
-                                    <Grid Margin="5">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                        </Grid.RowDefinitions>
-                                        <TextBlock Grid.Row="0"
+                            <Grid HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0"
+                                       Source="{Binding DisplayedImage}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Width="60"
+                                       Height="75"/>
+
+                                <Grid Grid.Column="1"
+                                      VerticalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0"
                                                FontWeight="Bold"
-                                               Text="{Binding OrderId, StringFormat={}Номер заказа: {0}}"/>
-                                        <TextBlock Grid.Row="1"
-                                               Text="{Binding OrderDate, StringFormat={}Дата заказа: {0:d}, ConverterCulture=ru-RU}"
+                                               Text="{Binding Title}"/>
+                                    <TextBlock Grid.Row="1"
+                                               Text="{Binding Description}"
                                                TextWrapping="Wrap"/>
-                                        <TextBlock Grid.Row="2"
-                                               Text="{Binding OrderDeliveryDate, StringFormat={}Дата доставки: {0:d}, ConverterCulture=ru-RU}"
+                                    <TextBlock Grid.Row="2"
+                                               Text="{Binding Manufacturer, StringFormat={}Производитель: {0}}"
                                                TextWrapping="Wrap"/>
-                                        <TextBlock Grid.Row="3"
-                                               Text="{Binding OrderAmmount, StringFormat={}Общая сумма заказа: {0:C2}, ConverterCulture=ru-RU}"
-                                               TextWrapping="Wrap"/>
-                                        <TextBlock Grid.Row="4"
-                                               Text="{Binding OrderDiscountAmmount, StringFormat={}Общая размер скидки: {0:C2}, ConverterCulture=ru-RU}"
-                                               TextWrapping="Wrap"/>
-                                        <TextBlock Grid.Row="5"
-                                               Text="{Binding OrderFullName, StringFormat={}ФИО клиента: {0}}"
-                                               TextWrapping="Wrap"/>
-                                        <TextBlock Grid.Row="6"
-                                                Text="{Binding OrderStatus, StringFormat={}Статус заказа: {0}}"
-                                                TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Row="3"
+                                               TextWrapping="Wrap">
+                                        <TextBlock.Inlines>
+                                            <Run Text="Цена:"/>
+                                            <Run Text="{Binding Price, StringFormat={}{0:C}, ConverterCulture=ru-RU}"
+                                                 TextDecorations="{Binding Discount, Converter={StaticResource ValueToTextDecorationsConverter}}"/>
+                                            <Run Text="{Binding DisplayedPrice, StringFormat={}{0:C}, ConverterCulture=ru-RU, Mode=OneWay}"/>
+                                        </TextBlock.Inlines>
+                                    </TextBlock>
 
+                                </Grid>
 
-                                    </Grid>
-                                </TabItem>
-                                <TabItem Header="Состав заказа">
-                                    <ListView Margin="5"
-                                              materialDesign:ListBoxItemAssist.ShowSelection="False"
-                                              ItemsSource="{Binding Orderproducts}">
-
-                                        <ListView.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <StackPanel />
-                                            </ItemsPanelTemplate>
-                                        </ListView.ItemsPanel>
-
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="auto"/>
-                                                        <ColumnDefinition Width="auto"/>
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <TextBlock Text="{Binding ProductArticleNumber}"
-                                                           Grid.Column="0"
-                                                           TextWrapping="Wrap"
-                                                           Margin="5"/>
-
-                                                    <TextBlock Text="{Binding ProductCount}"
-                                                           Grid.Column="1"
-                                                           TextWrapping="Wrap"
-                                                           Margin="5"/>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                    </ListView>
-                                </TabItem>
-                            </TabControl>
+                                <TextBlock Grid.Column="2"
+                                           Text="{Binding Discount, StringFormat={}Скидка: {0}%}"
+                                           TextWrapping="Wrap"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
                         </materialDesign:Card>
                     </DataTemplate>
                 </ListView.ItemTemplate>
