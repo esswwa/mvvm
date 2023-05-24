@@ -111,8 +111,6 @@
 
                 <ListView.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Редактировать"
-                                      Command="{Binding EditOrderCommand}"/>
                         <MenuItem Header="Подтвердить завершение заказа"
                                       Command="{Binding EditOrderCommand}"/>
                     </ContextMenu>
