@@ -22,7 +22,6 @@ namespace mvvm.ViewModels
         public string FullName { get; set; } = Settings.Default.UserName == string.Empty ? "Гость" :
                     $"{Settings.Default.UserSurname} {Settings.Default.UserName} {Settings.Default.UserPatronymic}";
 
-
         public BasketInfoViewModel (PageService pageService, ProductService productService,DocumentService documentService){
 
             _pageService = pageService;
@@ -111,6 +110,7 @@ namespace mvvm.ViewModels
             Products.Clear();
             Global.CurrentCart?.Clear();
             ValueCheck();
+            SelectedPoint = null;
         }, bool () => { return SelectedPoint != null && Products.Count != 0; });
 
     }

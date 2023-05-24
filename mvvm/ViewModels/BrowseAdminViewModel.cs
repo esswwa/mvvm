@@ -126,11 +126,11 @@
         public DateTime EditDataOrder { get; set; }
         public int EditStatusOrderIndex { get; set; }
 
-        public DelegateCommand EditOrderCommand => new(() =>
+        public DelegateCommand EditOrderCommand => new(async () =>
         {
             if (SelectedOrder == null)
                 return;
-            _productService.saveRedact(SelectedOrder, Orders);
+            await _productService.saveRedact(SelectedOrder, Orders);
 
         });
         #endregion
