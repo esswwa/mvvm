@@ -100,8 +100,8 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <TextBlock Text="lol"
-                       Panel.ZIndex="2"/>
+            <!--<TextBlock Text="lol"
+                       Panel.ZIndex="2"/>-->
             <ListView FontFamily="{StaticResource pwsFont}"
                       Panel.ZIndex="1"
                       ItemsSource="{Binding Products,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -128,9 +128,9 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <materialDesign:Card Background="{Binding Converter={StaticResource StringToBrushConverter}}"
+                        <materialDesign:Card Background="{Binding Discount, Converter={StaticResource StringToBrushConverter}}"
                                              Padding="8"
-                                             Height="120"
+                                             Height="160"
                                              HorizontalContentAlignment="Stretch">
                             <Grid HorizontalAlignment="Stretch"
                                   VerticalAlignment="Center">
