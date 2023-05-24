@@ -19,7 +19,7 @@ public partial class Product
 
     public float ProductCost { get; set; }
 
-    public sbyte? ProductDiscountAmount { get; set; }
+    public int ProductDiscountAmount { get; set; }
 
     public int ProductQuantityInStock { get; set; }
 

@@ -30,7 +30,7 @@ namespace mvvm.Services
                             Description = item.ProductDescription,
                             Manufacturer = item.ProductManufacturerNavigation.ProductManufacture,
                             Price = item.ProductCost,
-                            Discount = item.ProductDiscountAmount.Value,
+                            Discount = item.ProductDiscountAmount,
                             Article = item.ProductArticleNumber,
                             Quantity = item.ProductQuantityInStock
                         });

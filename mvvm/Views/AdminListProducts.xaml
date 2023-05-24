@@ -172,7 +172,7 @@
                                             <Run Text="{Binding Price, StringFormat={}{0:C}, ConverterCulture=ru-RU}"
                                                  TextDecorations="{Binding Discount, Converter={StaticResource ValueToTextDecorationsConverter}}"/>
                                             <Run Text="{Binding DisplayedPrice, StringFormat={}{0:C}, ConverterCulture=ru-RU, Mode=OneWay}"/>
-                                            <Run Text="{Binding ProductQuantityInStock, StringFormat={}{0:C}, ConverterCulture=ru-RU}"/>
+                                            <Run Text="{Binding ProductQuantityInStock, StringFormat={}{0:C}}"/>
                                         </TextBlock.Inlines>
                                     </TextBlock>
 
