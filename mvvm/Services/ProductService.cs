@@ -108,7 +108,27 @@ namespace mvvm.Services
             Orders.Insert(index, item);
             await _tradeContext.SaveChangesAsync();
         }
-        
+
+        public async Task redactProduct(Product SelectedProduct, ObservableCollection<Product> Products)
+        {
+            var item = Products.First(i => i.ProductArticleNumber == SelectedProduct.ProductArticleNumber);
+            var index = Products.IndexOf(item);
+
+            item.ProductArticleNumber = " ";
+            Products.RemoveAt(index);
+            Products.Insert(index, item);
+            await _tradeContext.SaveChangesAsync();
+        }
+
+
+
+        public async Task deleteProduct(Product SelectedProduct, ObservableCollection<Product> Products)
+        {
+            var item = Products.First(i => i.ProductArticleNumber == SelectedProduct.ProductArticleNumber);
+            var index = Products.IndexOf(item);
+            Products.RemoveAt(index);
+            await _tradeContext.SaveChangesAsync();
+        }
 
     }
 

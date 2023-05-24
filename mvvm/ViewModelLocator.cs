@@ -25,6 +25,7 @@ namespace mvvm
             services.AddTransient<BrowseProductViewModel>();
             services.AddTransient<BasketInfoViewModel>();
             services.AddTransient<BrowseAdminViewModel>();
+            services.AddTransient<AdminListProductsViewModel>();
             #endregion
 
             #region Connection
@@ -48,6 +49,7 @@ namespace mvvm
             services.AddSingleton<ProductService>();
             services.AddSingleton<DocumentService>();
 
+
             #endregion
 
             _provider = services.BuildServiceProvider();
@@ -62,5 +64,6 @@ namespace mvvm
         public BrowseProductViewModel? BrowseProductViewModel => _provider?.GetRequiredService<BrowseProductViewModel>();
         public BasketInfoViewModel? BasketInfoViewModel => _provider?.GetRequiredService<BasketInfoViewModel>();
         public BrowseAdminViewModel? BrowseAdminViewModel => _provider?.GetRequiredService<BrowseAdminViewModel>();
+        public AdminListProductsViewModel? AdminListProductsViewModel => _provider?.GetRequiredService<AdminListProductsViewModel>();
     }
 }

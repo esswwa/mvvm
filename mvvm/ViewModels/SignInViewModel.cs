@@ -29,7 +29,6 @@ namespace mvvm.ViewModels
                             _pageService.ChangePage(new BrowseProductPages());
                         else
                         {
-                            MessageBox.Show("Admin");
                             _pageService.ChangePage(new BrowseAdminPage());
                         }
                             
