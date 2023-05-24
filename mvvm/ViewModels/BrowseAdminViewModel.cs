@@ -130,28 +130,9 @@
         {
             if (SelectedOrder == null)
                 return;
-            EditDataOrder = SelectedOrder.OrderDeliveryDate.ToDateTime(TimeOnly.FromDateTime(DateTime.Now));
-            EditStatusOrderIndex = SelectedOrder.OrderStatus == "Завершен" ? 1 : 0;
-            IsDialogEditOrderOpen = true;
+            _productService.saveRedact(SelectedOrder, Orders);
+
         });
-
-        public DelegateCommand SaveCurrentOrderCommand => new(async () =>
-        {
-            if (SelectedOrder.OrderDeliveryDate != DateOnly.FromDateTime(EditDataOrder)
-            || SelectedOrder.OrderStatus != OrderFilters[EditStatusOrderIndex])
-            {
-                var item = Orders.First(i => i.OrderId == SelectedOrder.OrderId);
-                var index = Orders.IndexOf(item);
-                item.OrderDeliveryDate = DateOnly.FromDateTime(EditDataOrder);
-                item.OrderStatus = OrderFilters[EditStatusOrderIndex];
-
-                Orders.RemoveAt(index);
-                Orders.Insert(index, item);
-                await _productService.SaveChangesAsync();
-            }
-            IsDialogEditOrderOpen = false;
-        });
-
         #endregion
 
     }

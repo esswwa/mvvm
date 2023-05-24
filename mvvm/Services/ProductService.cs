@@ -98,6 +98,17 @@ namespace mvvm.Services
             return _tradeContext.Orderusers.ToList();
         }
 
+        public async Task saveRedact(Orderuser SelectedOrder, ObservableCollection<Orderuser> Orders)
+        {
+            var item = Orders.First(i => i.OrderId == SelectedOrder.OrderId);
+            var index = Orders.IndexOf(item);
+            item.OrderDeliveryDate = DateOnly.FromDateTime(SelectedOrder.OrderDeliveryDate.ToDateTime(TimeOnly.FromDateTime(DateTime.Now)));
+            item.OrderStatus = "Завершен";
+            Orders.RemoveAt(index);
+            Orders.Insert(index, item);
+            await _tradeContext.SaveChangesAsync();
+        }
+        
 
     }
 

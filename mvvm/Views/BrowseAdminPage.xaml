@@ -109,14 +109,16 @@
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
-                    <ListView.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Редактировать"
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Редактировать"
                                       Command="{Binding EditOrderCommand}"/>
-                        </ContextMenu>
-                    </ListView.ContextMenu>
+                        <MenuItem Header="Подтвердить завершение заказа"
+                                      Command="{Binding EditOrderCommand}"/>
+                    </ContextMenu>
+                </ListView.ContextMenu>
 
-                    <ListView.ItemsPanel>
+                <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="2">
                             </UniformGrid>
@@ -125,7 +127,7 @@
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                        <materialDesign:Card Background="{Binding Discount, Converter={StaticResource StringToBrushConverter}}"
+                        <materialDesign:Card Background="{Binding Converter={StaticResource StringToBrushConverter}}"
                                              Padding="8"
                                              Height="200"
                                              HorizontalContentAlignment="Stretch">
@@ -143,7 +145,7 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Row="0"
                                                FontWeight="Bold"
-                                               Text="{Binding OrderID, StringFormat={}Номер заказа: {0}}"/>
+                                               Text="{Binding OrderId, StringFormat={}Номер заказа: {0}}"/>
                                 <TextBlock Grid.Row="1"
                                                Text="{Binding OrderBeginDate, StringFormat={}Дата заказа: {0:d}, ConverterCulture=ru-RU}"
                                                TextWrapping="Wrap"/>
@@ -165,10 +167,6 @@
                                 <TextBlock Grid.Row="7"
                                                Text="{Binding OrderPickupPoint, StringFormat={}Пункт выдачи: {0}}"
                                                TextWrapping="Wrap"/>
-                                <TextBlock Grid.Column="2"
-                                           Text="{Binding Discount, StringFormat={}Скидка: {0}%}"
-                                           TextWrapping="Wrap"
-                                           VerticalAlignment="Center"/>
 
                             </Grid>
                         </materialDesign:Card>
