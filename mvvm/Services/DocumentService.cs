@@ -162,7 +162,7 @@ namespace mvvm.Services
 
             document.Add(content);
 
-            content = new Paragraph(string.Format("Код для получения:\n {0}", OrderCode))
+            content = new Paragraph(string.Format("Код получения:\n {0}", OrderCode))
                 .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
                 .SetFont(comic)
                 .SetFontSize(16);

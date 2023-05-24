@@ -115,6 +115,16 @@ namespace mvvm.Services
             var index = Products.IndexOf(item);
 
             item.ProductArticleNumber = " ";
+            item.ProductName = "";
+            item.ProductDescription = "";
+            item.ProductCategory = 0;
+            item.ProductPhoto = "";
+            item.ProductManufacturer = 0;
+            item.ProductCost = 0;
+            item.ProductDiscountAmount = 0;
+            item.ProductQuantityInStock = 0;
+            item.ProductStatus = "";
+
             Products.RemoveAt(index);
             Products.Insert(index, item);
             await _tradeContext.SaveChangesAsync();

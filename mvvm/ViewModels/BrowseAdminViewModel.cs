@@ -113,7 +113,7 @@
 
         public DelegateCommand HelpCommand => new(() =>
         {
-           
+            _pageService.ChangePage(new AdminListProducts());
         });
 
         #region Caterories
