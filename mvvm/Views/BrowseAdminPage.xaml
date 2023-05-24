@@ -154,7 +154,7 @@
                                                Text="{Binding OrderCost, StringFormat={}Общая сумма заказа: {0:C2}, ConverterCulture=ru-RU}"
                                                TextWrapping="Wrap"/>
                                 <TextBlock Grid.Row="4"
-                                               Text="{Binding OrderDiscountAmmount, StringFormat={}Общая сумма заказа: {0:C2}, ConverterCulture=ru-RU}"
+                                               Text="{Binding OrderDiscountAmmount, StringFormat={}Общая сумма скидки у заказа: {0:C2}, ConverterCulture=ru-RU}"
                                                TextWrapping="Wrap"/>
                                 <TextBlock Grid.Row="5"
                                                Text="{Binding OrderFIO, StringFormat={}ФИО клиента: {0}}"
