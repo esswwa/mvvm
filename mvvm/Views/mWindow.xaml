@@ -9,7 +9,7 @@
         DataContext="{Binding mWindowViewModel, 
                         Source={StaticResource ViewModelLocator}}"
       
-        Height="450" Width="800">
+        MinHeight="550" Width="1000">
     <Frame NavigationUIVisibility="Hidden"
            Content="{Binding PageSource}"/>
 </Window>

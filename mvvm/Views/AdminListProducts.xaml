@@ -100,10 +100,7 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <!--<TextBlock Text="lol"
-                       Panel.ZIndex="2"/>-->
             <ListView FontFamily="{StaticResource pwsFont}"
-                      Panel.ZIndex="1"
                       ItemsSource="{Binding Products,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       HorizontalContentAlignment="Stretch"

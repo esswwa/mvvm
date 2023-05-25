@@ -114,23 +114,31 @@ namespace mvvm.Services
             var item = Products.First(i => i.ProductArticleNumber == SelectedProduct.ProductArticleNumber);
             var index = Products.IndexOf(item);
 
-            item.ProductArticleNumber = " ";
-            item.ProductName = "";
-            item.ProductDescription = "";
-            item.ProductCategory = 0;
-            item.ProductPhoto = "";
-            item.ProductManufacturer = 0;
-            item.ProductCost = 0;
-            item.ProductDiscountAmount = 0;
-            item.ProductQuantityInStock = 0;
-            item.ProductStatus = "";
+            item.ProductArticleNumber = SelectedProduct.ProductArticleNumber;
+            item.ProductName = SelectedProduct.ProductName;
+            item.ProductDescription = SelectedProduct.ProductDescription;
+            item.ProductCategory = SelectedProduct.ProductCategory;
+            item.ProductPhoto = SelectedProduct.ProductPhoto;
+            item.ProductManufacturer = SelectedProduct.ProductManufacturer;
+            item.ProductCost = SelectedProduct.ProductCost;
+            item.ProductDiscountAmount = SelectedProduct.ProductDiscountAmount;
+            item.ProductQuantityInStock = SelectedProduct.ProductQuantityInStock;
+            item.ProductStatus = SelectedProduct.ProductStatus;
 
             Products.RemoveAt(index);
             Products.Insert(index, item);
             await _tradeContext.SaveChangesAsync();
         }
 
+        public Product getProd(string article) {
 
+            return _tradeContext.Products.Where(i => i.ProductArticleNumber == article).First();
+        }
+
+        public ObservableCollection<Product> getAllProd()
+        {
+            return _tradeContext.Products.ToObservableCollection<Product>();
+        }
 
         public async Task deleteProduct(Product SelectedProduct, ObservableCollection<Product> Products)
         {
@@ -138,6 +146,16 @@ namespace mvvm.Services
             var index = Products.IndexOf(item);
             Products.RemoveAt(index);
             await _tradeContext.SaveChangesAsync();
+        }
+
+        public List<int> getAllCategories()
+        {
+            return _tradeContext.Kategories.Select(i => i.Idkategory).ToList();
+        }
+
+        public List<int> getAllManufacrurers()
+        {
+            return _tradeContext.Manufacturers.Select(i => i.IdManufacturer).ToList();
         }
 
     }

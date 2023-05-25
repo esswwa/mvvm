@@ -26,6 +26,8 @@ namespace mvvm
             services.AddTransient<BasketInfoViewModel>();
             services.AddTransient<BrowseAdminViewModel>();
             services.AddTransient<AdminListProductsViewModel>();
+            services.AddTransient<EditAdminViewModel>();
+
             #endregion
 
             #region Connection
@@ -65,5 +67,7 @@ namespace mvvm
         public BasketInfoViewModel? BasketInfoViewModel => _provider?.GetRequiredService<BasketInfoViewModel>();
         public BrowseAdminViewModel? BrowseAdminViewModel => _provider?.GetRequiredService<BrowseAdminViewModel>();
         public AdminListProductsViewModel? AdminListProductsViewModel => _provider?.GetRequiredService<AdminListProductsViewModel>();
+        public EditAdminViewModel? EditAdminViewModel => _provider?.GetRequiredService<EditAdminViewModel>();
+
     }
 }

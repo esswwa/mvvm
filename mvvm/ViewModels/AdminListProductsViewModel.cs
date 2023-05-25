@@ -146,7 +146,9 @@ namespace mvvm.ViewModels
         });
         public DelegateCommand RedactCard => new(async () =>
         {
-            
+            ProductModel.products = SelectedProduct.Article;
+            _pageService.ChangePage(new EditAdminPage());
+
         });
 
         public DelegateCommand DeleteCard => new(async () =>
