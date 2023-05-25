@@ -108,8 +108,6 @@ namespace mvvm.ViewModels
 
             await _productService.redactProduct(Product, Products);
             _pageService.ChangePage(new AdminListProducts());
-            ProductModel.products = null;
-            ProductModel.status = null;
         }, bool () =>
         {
             if (string.IsNullOrWhiteSpace(Product.ProductArticleNumber)
@@ -136,8 +134,6 @@ namespace mvvm.ViewModels
 
             await _productService.addProduct(Product, Products);
             _pageService.ChangePage(new AdminListProducts());
-            ProductModel.products = null;
-            ProductModel.status = null;
         }, bool () =>
         {
             if (string.IsNullOrWhiteSpace(ProductArticleNumber)

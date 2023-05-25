@@ -73,6 +73,8 @@ namespace mvvm.ViewModels
             _productService = productService;
             CheckEnabled();
             SelectedFilter = "Все диапазоны";
+            ProductModel.products = null;
+            ProductModel.status = null;
         }
 
         private void CheckEnabled() => IsEnabledCart = Global.CurrentCart.Any(c => c.ArticleName != null);
