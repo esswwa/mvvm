@@ -21,7 +21,8 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="1.5*"/>
                 <ColumnDefinition Width="1.5*"/>
-                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="0.8*"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0"
@@ -62,7 +63,11 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
-            <Menu Grid.Column="4"
+            <Button Grid.Column="4"
+                    Content="Добавить"
+                    Foreground="White"
+                    Command="{Binding AddCard}"/>
+            <Menu Grid.Column="5"
                   Margin="5"
                   HorizontalAlignment="Right">
 

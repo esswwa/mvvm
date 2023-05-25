@@ -69,18 +69,33 @@ namespace mvvm.ViewModels
                 ProductManufacturer1 = Product.ProductManufacturer;
                 ProductCategory1 = Product.ProductCategory;
             }
-            else { 
-            
+            else
+            {
+                List<int> Manufacturers = _productService.getAllManufacrurers();
+                List<int> Categories = _productService.getAllCategories();
+
+
+                
+                Product = new Product();
+                Product.ProductArticleNumber = "";
+                Product.ProductName = "";
+                Product.ProductDescription = "";
+                Product.ProductPhoto = "";
+                Product.ProductCost = 0;
+                Product.ProductDiscountAmount = ProductDiscountAmount;
+                Product.ProductQuantityInStock = ProductQuantityInStock;
+                ProductStatus = new List<string> { ("уп."), ("шт.") };
+                ProductCategory = Categories;
+                ProductManufacturer = Manufacturers;
             }
-           
-        }
+
+            }
         public DelegateCommand ReturnBackCommand => new(() =>
         {
             _pageService.ChangePage(new AdminListProducts());
         });
         public AsyncCommand EditCommand => new(async () =>
         {
-            Product.ProductArticleNumber = ProductArticleNumber;
             Product.ProductName = ProductName;
             Product.ProductDescription = ProductDescription;
             Product.ProductCategory = ProductCategory1;
@@ -93,13 +108,43 @@ namespace mvvm.ViewModels
 
             await _productService.redactProduct(Product, Products);
             _pageService.ChangePage(new AdminListProducts());
+            ProductModel.products = null;
+            ProductModel.status = null;
+        }, bool () =>
+        {
+            if (string.IsNullOrWhiteSpace(Product.ProductArticleNumber)
+            || string.IsNullOrWhiteSpace(ProductName)
+            || string.IsNullOrWhiteSpace(ProductDescription)
+            || string.IsNullOrWhiteSpace(ProductStatus1)
+            || ProductModel.status == "Добавление")
+                return false;
+            return true;
+        });
+
+        public AsyncCommand AddCommand => new(async () =>
+        {
+            Product.ProductArticleNumber = ProductArticleNumber;
+            Product.ProductName = ProductName;
+            Product.ProductDescription = ProductDescription;
+            Product.ProductCategory = ProductCategory1;
+            Product.ProductManufacturer = ProductManufacturer1;
+            Product.ProductCost = ProductCost;
+            Product.ProductDiscountAmount = ProductDiscountAmount;
+            Product.ProductQuantityInStock = ProductQuantityInStock;
+            Product.ProductStatus = ProductStatus1;
+
+            await _productService.addProduct(Product, Products);
+            _pageService.ChangePage(new AdminListProducts());
+            ProductModel.products = null;
+            ProductModel.status = null;
         }, bool () =>
         {
             if (string.IsNullOrWhiteSpace(ProductArticleNumber)
             || string.IsNullOrWhiteSpace(ProductName)
             || string.IsNullOrWhiteSpace(ProductDescription)
             || string.IsNullOrWhiteSpace(ProductPhoto)
-            || string.IsNullOrWhiteSpace(ProductStatus1))
+            || string.IsNullOrWhiteSpace(ProductStatus1)
+            || ProductModel.status == "Редактирование")
                 return false;
             return true;
         });

@@ -37,7 +37,6 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <TextBox Grid.Row="0"
-                     IsEnabled="False"
                      Text="{Binding ProductArticleNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      materialDesign:HintAssist.Hint="Артикль"
                      Margin="0 0 0 5"/>
@@ -101,7 +100,12 @@
                 <Button Content="Изменить"
                         Foreground="White"
                         materialDesign:ButtonAssist.CornerRadius="15"
+                        Margin="0 0 15 0"
                         Command="{Binding EditCommand, IsAsync=True}"/>
+                <Button Content="Добавить"
+                        Foreground="White"
+                        materialDesign:ButtonAssist.CornerRadius="15"
+                        Command="{Binding AddCommand, IsAsync=True}"/>
             </StackPanel>
         </Grid>
     </Grid>

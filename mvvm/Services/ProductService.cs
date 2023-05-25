@@ -130,6 +130,12 @@ namespace mvvm.Services
             await _tradeContext.SaveChangesAsync();
         }
 
+        public async Task addProduct(Product SelectedProduct, ObservableCollection<Product> Products)
+        {
+            Products.Append(SelectedProduct);
+            await _tradeContext.SaveChangesAsync();
+        }
+
         public Product getProd(string article) {
 
             return _tradeContext.Products.Where(i => i.ProductArticleNumber == article).First();

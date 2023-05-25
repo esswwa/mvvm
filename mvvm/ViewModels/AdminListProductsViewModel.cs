@@ -147,6 +147,7 @@ namespace mvvm.ViewModels
         public DelegateCommand RedactCard => new(async () =>
         {
             ProductModel.products = SelectedProduct.Article;
+            ProductModel.status = "Редактирование";
             _pageService.ChangePage(new EditAdminPage());
 
         });
@@ -155,10 +156,13 @@ namespace mvvm.ViewModels
         {
 
         });
-
-        public DelegateCommand CardCommand => new(() =>
+        public DelegateCommand AddCard => new(() =>
         {
-            _pageService.ChangePage(new BasketInfoPage());
+
+            ProductModel.products = null;
+            ProductModel.status = "Добавление";
+            _pageService.ChangePage(new EditAdminPage());
         });
+        
     }
 }
