@@ -127,6 +127,7 @@ namespace mvvm.ViewModels
             Product.ProductName = ProductName;
             Product.ProductDescription = ProductDescription;
             Product.ProductCategory = ProductCategory1;
+            Product.ProductPhoto = ProductPhoto;
             Product.ProductManufacturer = ProductManufacturer1;
             Product.ProductCost = ProductCost;
             Product.ProductDiscountAmount = ProductDiscountAmount;
@@ -142,7 +143,6 @@ namespace mvvm.ViewModels
             if (string.IsNullOrWhiteSpace(ProductArticleNumber)
             || string.IsNullOrWhiteSpace(ProductName)
             || string.IsNullOrWhiteSpace(ProductDescription)
-            || string.IsNullOrWhiteSpace(ProductPhoto)
             || string.IsNullOrWhiteSpace(ProductStatus1)
             || ProductModel.status == "Редактирование")
                 return false;
