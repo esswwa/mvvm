@@ -211,14 +211,19 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
                         <Button 
                             Content="Добавить производителя"
                             Width="200"
+                            Grid.ColumnSpan="2"
                             Foreground="White"
                             Margin="0 5 0 5"
                             Command="{Binding AddManufacturer}"/>
                         <ListView FontFamily="{StaticResource pwsFont}"
-                                  Grid.Row="1"
+                                  Grid.Row="0"
                                   ItemsSource="{Binding Manufacturers,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   SelectedItem="{Binding SelectedManufacture, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   HorizontalContentAlignment="Stretch"
@@ -232,12 +237,12 @@
                             </ContextMenu>
                                   </ListView.ContextMenu>
 
-                                  <ListView.ItemsPanel>
+                                  <!--<ListView.ItemsPanel>
                                       <ItemsPanelTemplate>
                                           <UniformGrid Columns="2">
                                           </UniformGrid>
                                       </ItemsPanelTemplate>
-                                  </ListView.ItemsPanel>
+                                  </ListView.ItemsPanel>-->
 
                                   <ListView.ItemTemplate>
                                       <DataTemplate>
@@ -272,6 +277,43 @@
                                       </DataTemplate>
                                   </ListView.ItemTemplate>
                         </ListView>
+                        <Grid Grid.Row="1"
+                              Grid.Column="1"
+                              HorizontalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{Binding HeaderTextManufacture}"
+                                       Grid.Row="0"
+                                       Margin="0 0 0 5"/>
+                            <TextBox materialDesign:HintAssist.Hint="ID производителя"
+                                     Text="{Binding idManufacture, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     IsEnabled="False"
+                                     Grid.Row="1"
+                                     Margin="0 0 0 5"/>
+                            <TextBox materialDesign:HintAssist.Hint="Производитель"
+                                     Text="{Binding Manufacture, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Grid.Row="2"
+                                     Margin="0 0 0 5"/>
+                            <Button 
+                                    Content="Добавить"
+                                    Width="200"
+                                    Grid.Row="3"
+                                    Foreground="White"
+                                    Margin="0 5 0 5"
+                                    Command="{Binding AddManufactureTrue}"/>
+                            <Button 
+                                    Content="Редактировать"
+                                    Width="200"
+                                    Grid.Row="4"
+                                    Foreground="White"
+                                    Margin="0 5 0 5"
+                                    Command="{Binding EditManufactureTrue}"/>
+                        </Grid>
                     </Grid>
                 </TabItem>
             <TabItem Header="Категории">
@@ -280,7 +322,12 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
                     <Button 
+                            Grid.ColumnSpan="2"
                             Content="Добавить категории"
                             Width="200"
                             Foreground="White"
@@ -288,6 +335,7 @@
                             Command="{Binding AddCategories}"/>
                     <ListView FontFamily="{StaticResource pwsFont}"
                                   Grid.Row="1"
+                                  Grid.Column="0"
                                   ItemsSource="{Binding Categories,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   SelectedItem="{Binding SelectedCategorie, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   HorizontalContentAlignment="Stretch"
@@ -301,12 +349,12 @@
                             </ContextMenu>
                         </ListView.ContextMenu>
 
-                        <ListView.ItemsPanel>
+                        <!--<ListView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <UniformGrid Columns="2">
                                 </UniformGrid>
                             </ItemsPanelTemplate>
-                        </ListView.ItemsPanel>
+                        </ListView.ItemsPanel>-->
 
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -341,6 +389,43 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                    <Grid Grid.Row="1"
+                              Grid.Column="1"
+                              HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding HeaderTextCategorie}"
+                                       Grid.Row="0"
+                                       Margin="0 0 0 5"/>
+                        <TextBox materialDesign:HintAssist.Hint="ID категории"
+                                     Text="{Binding idCategorie, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     IsEnabled="False"
+                                     Grid.Row="1"
+                                     Margin="0 0 0 5"/>
+                        <TextBox materialDesign:HintAssist.Hint="Категория"
+                                     Text="{Binding Categorie, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Grid.Row="2"
+                                     Margin="0 0 0 5"/>
+                        <Button 
+                                    Content="Добавить"
+                                    Width="200"
+                                    Grid.Row="3"
+                                    Foreground="White"
+                                    Margin="0 5 0 5"
+                                    Command="{Binding AddCategorieTrue}"/>
+                        <Button 
+                                    Content="Редактировать"
+                                    Width="200"
+                                    Grid.Row="4"
+                                    Foreground="White"
+                                    Margin="0 5 0 5"
+                                    Command="{Binding EditCategorieTrue}"/>
+                    </Grid>
                 </Grid>
             </TabItem>
         </TabControl>
