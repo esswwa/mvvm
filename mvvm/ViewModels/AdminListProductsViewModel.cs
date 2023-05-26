@@ -145,7 +145,6 @@ namespace mvvm.ViewModels
             ProductModel.products = SelectedProduct.Article;
             ProductModel.status = "Редактирование";
             _pageService.ChangePage(new EditAdminPage());
-
         });
 
         public DelegateCommand DeleteCard => new(async () =>
@@ -157,7 +156,6 @@ namespace mvvm.ViewModels
         });
         public DelegateCommand AddCard => new(() =>
         {
-
             ProductModel.products = null;
             ProductModel.status = "Добавление";
             _pageService.ChangePage(new EditAdminPage());

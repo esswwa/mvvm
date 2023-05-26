@@ -22,7 +22,6 @@
                 <ColumnDefinition Width="1.5*"/>
                 <ColumnDefinition Width="1.5*"/>
                 <ColumnDefinition Width="0.4*"/>
-                <ColumnDefinition Width="0.8*"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0"
@@ -63,11 +62,8 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
-            <Button Grid.Column="4"
-                    Content="Добавить"
-                    Foreground="White"
-                    Command="{Binding AddCard}"/>
-            <Menu Grid.Column="5"
+            
+            <Menu Grid.Column="4"
                   Margin="5"
                   HorizontalAlignment="Right">
 
@@ -87,8 +83,7 @@
 
                     <MenuItem Header="Заказы"
                               Command="{Binding CardCommand}"
-                              Foreground="White"
-                              IsEnabled="{Binding IsEnabledCart}"/>
+                              Foreground="White"/>
 
                     <Separator Style="{StaticResource MaterialDesignLightSeparator}"
                                    Margin="10 0 10 0"/>
@@ -105,7 +100,18 @@
         </Grid>
 
         <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button 
+                    Content="Добавить"
+                    Width="200"
+                    Foreground="White"
+                    Margin="0 5 0 5"
+                    Command="{Binding AddCard}"/>
             <ListView FontFamily="{StaticResource pwsFont}"
+                      Grid.Row="1"
                       ItemsSource="{Binding Products,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       HorizontalContentAlignment="Stretch"
