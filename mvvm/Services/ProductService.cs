@@ -218,6 +218,17 @@ namespace mvvm.Services
             return _tradeContext.Manufacturers.Select(i => i.IdManufacturer).ToList();
         }
 
+
+        public async Task<List<Kategory>> getAllCategoriesObjects()
+        {
+            return await _tradeContext.Kategories.ToListAsync();
+        }
+
+        public async Task<List<Manufacturer>> getAllManufacrurersObjects()
+        {
+            return await _tradeContext.Manufacturers.ToListAsync();
+        }
+
     }
 
   

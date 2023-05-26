@@ -13,8 +13,6 @@
             "По убыванию (Скидка)"
         };
 
-
-
         public List<string> Filters { get; set; } = new() { 
             "Все диапазоны",
             "Без скидки",
@@ -22,8 +20,6 @@
             "5-9%", 
             "9% и более" 
         };
-
-
 
         public bool IsEnabledCart { get; set; }
 
@@ -43,23 +39,17 @@
             set { SetValue(value, changedCallback: UpdateProduct); }
         }
 
-
-
         public string SelectedFilter
         {
             get { return GetValue<string>(); }
             set { SetValue(value, changedCallback: UpdateProduct); }
         }
 
-
-
         public string Search
         {
             get { return GetValue<string>(); }
             set { SetValue(value, changedCallback: UpdateProduct); }
         }
-
-
 
         public BrowseProductViewModel(PageService pageService, ProductService productService)
         {

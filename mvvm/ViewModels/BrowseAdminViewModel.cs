@@ -10,8 +10,6 @@
             "По убыванию"
         };
 
-
-
         public List<string> Filters { get; set; } = new() {
             "Все диапазоны", 
             "Новый",
@@ -58,7 +56,6 @@
             SelectedFilter = "Все диапазоны";
         }
 
-
         private async void UpdateProduct()
         {
             var currentOrder = await _productService.GetOrders();
@@ -79,8 +76,6 @@
             }
             //if (!string.IsNullOrEmpty(Search))
             //    currentProduct = currentProduct.Where(p => p.Title.ToLower().Contains(Search.ToLower())).ToList();
-
-
 
             if (!string.IsNullOrEmpty(SelectedSort))
             {
@@ -110,7 +105,6 @@
             _pageService.ChangePage(new SingInPage());
         });
 
-
         public DelegateCommand HelpCommand => new(() =>
         {
             _pageService.ChangePage(new AdminListProducts());
@@ -119,7 +113,6 @@
         #region Caterories
 
         public Orderuser SelectedOrder { get; set; }
-
 
         // Редактирование
         public bool IsDialogEditOrderOpen { get; set; } = false;

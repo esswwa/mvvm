@@ -37,7 +37,10 @@ namespace mvvm.ViewModels
         public List<DbProduct> Products { get; set; }
 
         public ObservableCollection<Product> Products1 { get; set; }
-        
+
+        public List<Kategory> Categories { get; set; }
+
+        public List<Manufacturer> Manufacturers { get; set; }
 
         public DbProduct SelectedProduct { get; set; }
         public Product selectProduct { get; set; }
@@ -81,6 +84,10 @@ namespace mvvm.ViewModels
         private async void UpdateProduct()
         {
             var currentProduct = await _productService.GetProductsAdmin();
+            var currentManufacturer = await _productService.getAllManufacrurersObjects();
+            var currentCategorie = await _productService.getAllCategoriesObjects();
+            Manufacturers = currentManufacturer;
+            Categories = currentCategorie;
             MaxRecords = currentProduct.Count;
 
             if (!string.IsNullOrEmpty(SelectedFilter))
