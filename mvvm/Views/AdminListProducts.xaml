@@ -105,7 +105,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Button 
-                    Content="Добавить"
+                    Content="Добавить продукт"
                     Width="200"
                     Foreground="White"
                     Margin="0 5 0 5"
