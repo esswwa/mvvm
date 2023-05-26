@@ -192,7 +192,6 @@
                                                     <Run Text="{Binding DisplayedPrice, StringFormat={}{0:C}, ConverterCulture=ru-RU, Mode=OneWay}"/>
                                                 </TextBlock.Inlines>
                                             </TextBlock>
-
                                         </Grid>
 
                                         <TextBlock Grid.Column="2"
