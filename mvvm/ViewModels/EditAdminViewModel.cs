@@ -132,7 +132,7 @@ namespace mvvm.ViewModels
             Product.ProductQuantityInStock = ProductQuantityInStock;
             Product.ProductStatus = ProductStatus1;
 
-            await _productService.addProduct(Product, Products);
+            await _productService.addProduct(Product);
             _pageService.ChangePage(new AdminListProducts());
         }, bool () =>
         {

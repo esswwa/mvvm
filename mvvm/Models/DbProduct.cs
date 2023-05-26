@@ -14,6 +14,7 @@
         public int Discount { get; set; }
         public int Quantity { get;set; }
         public string Article { get; set; }
+        public string Status { get; set; }
         public int Count { get; set; }
         public float? DisplayedPrice
         {

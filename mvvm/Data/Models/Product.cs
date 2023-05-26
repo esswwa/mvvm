@@ -25,6 +25,8 @@ public partial class Product
 
     public string ProductStatus { get; set; } = null!;
 
+    public string ProductStatusActiv { get; set; } = null!;
+
     public virtual Kategory ProductCategoryNavigation { get; set; } = null!;
 
     public virtual Manufacturer ProductManufacturerNavigation { get; set; } = null!;

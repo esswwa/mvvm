@@ -169,6 +169,7 @@ public partial class TradeContext : DbContext
             entity.Property(e => e.ProductName).HasColumnType("text");
             entity.Property(e => e.ProductPhoto).HasColumnType("text");
             entity.Property(e => e.ProductStatus).HasMaxLength(20);
+            entity.Property(e => e.ProductStatusActiv).HasMaxLength(45);
             entity.Property(e => e.ProductQuantityInStock).HasColumnName("ProductQuantityInStock");
             entity.Property(e => e.ProductDiscountAmount).HasColumnName("ProductDiscountAmount");
 

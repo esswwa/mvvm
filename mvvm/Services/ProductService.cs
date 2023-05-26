@@ -22,24 +22,63 @@ namespace mvvm.Services
                 {
                     foreach (var item in product)
                     {
-                        products.Add(new DbProduct
+                        if (item.ProductStatusActiv != "Удален")
                         {
+                            products.Add(new DbProduct
+                            {
 
-                            Image = item.ProductPhoto == string.Empty ? "picture.png" : item.ProductPhoto,
-                            Title = item.ProductName,
-                            Description = item.ProductDescription,
-                            Manufacturer = item.ProductManufacturerNavigation.ProductManufacture,
-                            Price = item.ProductCost,
-                            Discount = item.ProductDiscountAmount,
-                            Article = item.ProductArticleNumber,
-                            Quantity = item.ProductQuantityInStock
-                        });
+                                Image = item.ProductPhoto == string.Empty ? "picture.png" : item.ProductPhoto,
+                                Title = item.ProductName,
+                                Description = item.ProductDescription,
+                                Manufacturer = item.ProductManufacturerNavigation.ProductManufacture,
+                                Price = item.ProductCost,
+                                Discount = item.ProductDiscountAmount,
+                                Article = item.ProductArticleNumber,
+                                Quantity = item.ProductQuantityInStock,
+                                Status = item.ProductStatusActiv
+                            });
+                        }    
                     }
                 });
             }
             catch { }
             return products;
         }
+
+        public async Task<List<DbProduct>> GetProductsAdmin()
+        {
+            List<DbProduct> products = new();
+            try
+            {
+                var product = await _tradeContext.Products.ToListAsync();
+                await _tradeContext.Manufacturers.ToListAsync();
+                await Task.Run(() =>
+                {
+                    foreach (var item in product)
+                    {
+                            products.Add(new DbProduct
+                            {
+
+                                Image = item.ProductPhoto == string.Empty ? "picture.png" : item.ProductPhoto,
+                                Title = item.ProductName,
+                                Description = item.ProductDescription,
+                                Manufacturer = item.ProductManufacturerNavigation.ProductManufacture,
+                                Price = item.ProductCost,
+                                Discount = item.ProductDiscountAmount,
+                                Article = item.ProductArticleNumber,
+                                Quantity = item.ProductQuantityInStock,
+                                Status = item.ProductStatusActiv
+                            });
+                    }
+                });
+            }
+            catch { }
+            return products;
+        }
+
+
+
+        
         public async Task<List<DbProduct>> getBasket() {
 
             List<DbProduct> a = new();
@@ -130,9 +169,32 @@ namespace mvvm.Services
             await _tradeContext.SaveChangesAsync();
         }
 
-        public async Task addProduct(Product SelectedProduct, ObservableCollection<Product> Products)
+        public async Task deleteProduct(Product SelectedProduct, ObservableCollection<Product> Products)
         {
-            Products.Append(SelectedProduct);
+            var item = Products.First(i => i.ProductArticleNumber == SelectedProduct.ProductArticleNumber);
+            var index = Products.IndexOf(item);
+            item.ProductStatusActiv = "Удален";
+            Products.RemoveAt(index);
+            Products.Insert(index, item);
+            await _tradeContext.SaveChangesAsync();
+        }
+
+        public async Task addProduct(Product SelectedProduct)
+        {
+            await _tradeContext.AddAsync(new Product
+            {
+                ProductArticleNumber= SelectedProduct.ProductArticleNumber,
+                ProductName= SelectedProduct.ProductName,   
+                ProductDescription= SelectedProduct.ProductDescription,
+                ProductCategory= SelectedProduct.ProductCategory,
+                ProductPhoto= SelectedProduct.ProductPhoto,
+                ProductManufacturer= SelectedProduct.ProductManufacturer,
+                ProductCost= SelectedProduct.ProductCost,
+                ProductDiscountAmount = SelectedProduct.ProductDiscountAmount,
+                ProductStatus= SelectedProduct.ProductStatus,
+                ProductQuantityInStock = SelectedProduct.ProductQuantityInStock,
+                ProductStatusActiv = "Активный"
+            });
             await _tradeContext.SaveChangesAsync();
         }
 
@@ -144,14 +206,6 @@ namespace mvvm.Services
         public ObservableCollection<Product> getAllProd()
         {
             return _tradeContext.Products.ToObservableCollection<Product>();
-        }
-
-        public async Task deleteProduct(Product SelectedProduct, ObservableCollection<Product> Products)
-        {
-            var item = Products.First(i => i.ProductArticleNumber == SelectedProduct.ProductArticleNumber);
-            var index = Products.IndexOf(item);
-            Products.RemoveAt(index);
-            await _tradeContext.SaveChangesAsync();
         }
 
         public List<int> getAllCategories()

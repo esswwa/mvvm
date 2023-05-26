@@ -157,6 +157,7 @@
                                         <RowDefinition Height="auto"/>
                                         <RowDefinition Height="auto"/>
                                         <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
                                     </Grid.RowDefinitions>
 
                                     <TextBlock Grid.Row="0"
@@ -172,6 +173,9 @@
                                                Text="{Binding Quantity, StringFormat={}Количество на складе: {0}}"
                                                TextWrapping="Wrap"/>
                                     <TextBlock Grid.Row="4"
+                                               Text="{Binding Status, StringFormat={}Статус: {0}}"
+                                               TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Row="5"
                                            TextWrapping="Wrap">
                                         <TextBlock.Inlines>
                                             <Run Text="Цена:"/>

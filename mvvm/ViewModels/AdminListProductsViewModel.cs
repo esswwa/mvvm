@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mvvm.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,7 +36,11 @@ namespace mvvm.ViewModels
 
         public List<DbProduct> Products { get; set; }
 
+        public ObservableCollection<Product> Products1 { get; set; }
+        
+
         public DbProduct SelectedProduct { get; set; }
+        public Product selectProduct { get; set; }
 
         public string FullName { get; set; } = Settings.Default.UserName == string.Empty ? "Гость" : $"{Settings.Default.UserSurname} {Settings.Default.UserName} {Settings.Default.UserPatronymic}";
 
@@ -49,23 +54,17 @@ namespace mvvm.ViewModels
             set { SetValue(value, changedCallback: UpdateProduct); }
         }
 
-
-
         public string SelectedFilter
         {
             get { return GetValue<string>(); }
             set { SetValue(value, changedCallback: UpdateProduct); }
         }
 
-
-
         public string Search
         {
             get { return GetValue<string>(); }
             set { SetValue(value, changedCallback: UpdateProduct); }
         }
-
-
 
         public AdminListProductsViewModel(PageService pageService, ProductService productService)
         {
@@ -81,7 +80,7 @@ namespace mvvm.ViewModels
 
         private async void UpdateProduct()
         {
-            var currentProduct = await _productService.GetProducts();
+            var currentProduct = await _productService.GetProductsAdmin();
             MaxRecords = currentProduct.Count;
 
             if (!string.IsNullOrEmpty(SelectedFilter))
@@ -103,12 +102,8 @@ namespace mvvm.ViewModels
                 }
             }
 
-
-
             if (!string.IsNullOrEmpty(Search))
                 currentProduct = currentProduct.Where(p => p.Title.ToLower().Contains(Search.ToLower())).ToList();
-
-
 
             if (!string.IsNullOrEmpty(SelectedSort))
             {
@@ -131,7 +126,6 @@ namespace mvvm.ViewModels
                         break;
                 }
             }
-
 
             Records = currentProduct.Count;
             Products = currentProduct;
@@ -156,7 +150,10 @@ namespace mvvm.ViewModels
 
         public DelegateCommand DeleteCard => new(async () =>
         {
-
+            selectProduct = _productService.getProd(SelectedProduct.Article);
+            Products1 = _productService.getAllProd();
+            await _productService.deleteProduct(selectProduct, Products1);
+            _pageService.ChangePage(new BrowseAdminPage());
         });
         public DelegateCommand AddCard => new(() =>
         {
@@ -165,6 +162,11 @@ namespace mvvm.ViewModels
             ProductModel.status = "Добавление";
             _pageService.ChangePage(new EditAdminPage());
         });
-        
+
+        public DelegateCommand CardCommand => new(() =>
+        {
+            _pageService.ChangePage(new BrowseAdminPage());
+        });
+
     }
 }
