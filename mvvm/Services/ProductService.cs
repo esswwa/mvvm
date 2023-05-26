@@ -198,6 +198,51 @@ namespace mvvm.Services
             await _tradeContext.SaveChangesAsync();
         }
 
+        public async Task addManufature(string manufacture)
+        {
+            await _tradeContext.AddAsync(new Manufacturer
+            {
+                IdManufacturer = getMaxManufacture() + 1,
+                ProductManufacture = manufacture
+            });
+            await _tradeContext.SaveChangesAsync();
+        }
+
+        public async Task addCategories(string categorie)
+        {
+            await _tradeContext.AddAsync(new Kategory
+            {
+                Idkategory = getMaxCategorie() + 1,
+                ProductKategory = categorie
+            });
+            await _tradeContext.SaveChangesAsync();
+        }
+
+        public async Task editManufature(int SelectedManufacture, string manufacture, ObservableCollection<Manufacturer> Manufacturers)
+        {
+            var item = Manufacturers.First(i => i.IdManufacturer == SelectedManufacture);
+            var index = Manufacturers.IndexOf(item);
+
+            item.IdManufacturer = SelectedManufacture;
+            item.ProductManufacture = manufacture;
+
+            Manufacturers.RemoveAt(index);
+            Manufacturers.Insert(index, item);
+            await _tradeContext.SaveChangesAsync();
+        }
+        public async Task editCategorie(int SelectedCategorie, string manufacture, ObservableCollection<Kategory> Categories)
+        {
+            var item = Categories.First(i => i.Idkategory == SelectedCategorie);
+            var index = Categories.IndexOf(item);
+
+            item.Idkategory = SelectedCategorie;
+            item.ProductKategory = manufacture;
+
+            Categories.RemoveAt(index);
+            Categories.Insert(index, item);
+            await _tradeContext.SaveChangesAsync();
+        }
+
         public Product getProd(string article) {
 
             return _tradeContext.Products.Where(i => i.ProductArticleNumber == article).First();
@@ -211,6 +256,16 @@ namespace mvvm.Services
         public List<int> getAllCategories()
         {
             return _tradeContext.Kategories.Select(i => i.Idkategory).ToList();
+        }
+
+        public int getMaxCategorie()
+        {
+            return _tradeContext.Kategories.Max(i => i.Idkategory);
+        }
+
+        public int getMaxManufacture()
+        {
+            return _tradeContext.Manufacturers.Max(i => i.IdManufacturer);
         }
 
         public List<int> getAllManufacrurers()

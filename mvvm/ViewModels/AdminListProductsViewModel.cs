@@ -42,7 +42,12 @@ namespace mvvm.ViewModels
 
         public List<Manufacturer> Manufacturers { get; set; }
 
+        public ObservableCollection<Kategory> Categories1 { get; set; }
+
+        public ObservableCollection<Manufacturer> Manufacturers1 { get; set; }
+
         public DbProduct SelectedProduct { get; set; }
+
         public Product selectProduct { get; set; }
 
         public string FullName { get; set; } = Settings.Default.UserName == string.Empty ? "Гость" : $"{Settings.Default.UserSurname} {Settings.Default.UserName} {Settings.Default.UserPatronymic}";
@@ -51,6 +56,32 @@ namespace mvvm.ViewModels
 
         public int? Records { get; set; } = 0;
 
+        public string HeaderTextManufacture { get; set; }
+
+        public Visibility VisibilityManufacture { get; set; }
+
+        public Visibility VisibilityCategorie { get; set; }
+
+        public DelegateCommand<string> AddManufacturer { get; set; }
+        public DelegateCommand<string> AddCategories { get; set; }
+
+        public int idManufacture { get; set; }
+
+        public string Manufacture { get; set; }
+
+        public int idCategorie { get; set; }
+
+        public string Categorie { get; set; }
+
+        public string buttonManufacture { get; set; }
+
+        public Manufacturer SelectedManufacture { get; set; }
+
+        public Kategory SelectedCategorie { get; set; }
+         
+        public string buttonCategories { get; set; }
+
+        public string HeaderTextCategorie { get; set; }
         public string SelectedSort
         {
             get { return GetValue<string>(); }
@@ -77,7 +108,83 @@ namespace mvvm.ViewModels
             SelectedFilter = "Все диапазоны";
             ProductModel.products = null;
             ProductModel.status = null;
+            AddManufacturer = new DelegateCommand<string>(ManufactureMethod);
+            AddCategories = new DelegateCommand<string>(CategorieMethod);
+            VisibilityManufacture = Visibility.Hidden;
+            VisibilityCategorie = Visibility.Hidden;
         }
+
+
+        private void ManufactureMethod(string parametr)
+        {
+            if (parametr.Contains("Добавить"))
+            {
+                VisibilityManufacture = Visibility.Visible;
+                HeaderTextManufacture = "Добавление производителя";
+                buttonManufacture = "Добавить";
+                idManufacture = 0;
+                Manufacture = "";
+            }
+            else if (parametr.Contains("Редактировать"))
+            {
+                VisibilityManufacture = Visibility.Visible;
+                HeaderTextManufacture = "Редактирование производителя";
+                buttonManufacture = "Редактировать";
+                idManufacture = SelectedManufacture.IdManufacturer;
+                Manufacture = SelectedManufacture.ProductManufacture;
+            }
+        }
+
+        private void CategorieMethod(string parametr)
+        {
+            if (parametr.Contains("Добавить"))
+            {
+                VisibilityCategorie = Visibility.Visible;
+                HeaderTextCategorie = "Добавление категории";
+                buttonCategories = "Добавить";
+                idCategorie = 0;
+                Categorie = "";
+            }
+            else if (parametr.Contains("Редактировать"))
+            {
+                VisibilityCategorie = Visibility.Visible;
+                HeaderTextCategorie = "Редактирование категории";
+                buttonCategories = "Редактировать";
+                idCategorie = SelectedCategorie.Idkategory;
+                Categorie = SelectedCategorie.ProductKategory;
+            }
+        }
+
+        public DelegateCommand AddManufactureTrue => new(async () =>
+        {
+            Manufacturers1 = Manufacturers.ToObservableCollection();
+            if (buttonManufacture == "Добавить")
+            {
+                await _productService.addManufature(Manufacture);
+                VisibilityManufacture = Visibility.Hidden;
+            }
+            else if (buttonManufacture == "Редактировать") {
+                await _productService.editManufature(idManufacture, Manufacture, Manufacturers1);
+                VisibilityManufacture = Visibility.Hidden;
+            }
+        });
+
+        public DelegateCommand AddCategorieTrue => new(async () =>
+        {
+            Categories1 = Categories.ToObservableCollection();
+            if (buttonCategories == "Добавить")
+            {
+                await _productService.addCategories(Categorie);
+                VisibilityManufacture = Visibility.Hidden;
+            }
+            else if (buttonCategories == "Редактировать")
+            {
+                await _productService.editCategorie(idCategorie, Categorie, Categories1);
+                VisibilityManufacture = Visibility.Hidden;
+            }
+        });
+
+
 
         private void CheckEnabled() => IsEnabledCart = Global.CurrentCart.Any(c => c.ArticleName != null);
 
