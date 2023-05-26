@@ -175,12 +175,12 @@ namespace mvvm.ViewModels
             if (buttonCategories == "Добавить")
             {
                 await _productService.addCategories(Categorie);
-                VisibilityManufacture = Visibility.Hidden;
+                VisibilityCategorie = Visibility.Hidden;
             }
             else if (buttonCategories == "Редактировать")
             {
                 await _productService.editCategorie(idCategorie, Categorie, Categories1);
-                VisibilityManufacture = Visibility.Hidden;
+                VisibilityCategorie = Visibility.Hidden;
             }
         });
 
