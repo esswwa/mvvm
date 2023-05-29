@@ -55,7 +55,8 @@
                     materialDesign:HintAssist.Hint="Категории"
                     materialDesign:TextFieldAssist.HasClearButton="True"
                     ItemsSource="{Binding ProductCategory}"
-                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                DisplayMemberPath="ProductKategory"    
+                Style="{StaticResource MaterialDesignOutlinedComboBox}"
                     SelectedItem="{Binding ProductCategory1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     Margin="0 0 0 5"/>
             <TextBox Grid.Row="5"
@@ -67,6 +68,7 @@
                     materialDesign:HintAssist.Hint="Производитель"
                     materialDesign:TextFieldAssist.HasClearButton="True"
                     ItemsSource="{Binding ProductManufacturer}"
+                    DisplayMemberPath="ProductManufacture"
                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
                     SelectedItem="{Binding ProductManufacturer1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     Margin="0 0 0 5"/>

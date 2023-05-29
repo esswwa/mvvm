@@ -23,13 +23,13 @@ namespace mvvm.ViewModels
 
         public string ProductDescription { get; set; }
 
-        public List<int> ProductCategory { get; set; }
+        public List<Kategory> ProductCategory { get; set; }
 
         public string ProductPhoto { get; set; }
 
         public string TextHead { get; set; }
 
-        public List<int> ProductManufacturer { get; set; }
+        public List<Manufacturer> ProductManufacturer { get; set; }
 
         public float ProductCost { get; set; }
 
@@ -40,8 +40,8 @@ namespace mvvm.ViewModels
         public List<string> ProductStatus { get; set; }
 
         public string ProductStatus1 { get; set; }
-        public int ProductManufacturer1 { get; set; }
-        public int ProductCategory1 { get; set; }
+        public Manufacturer ProductManufacturer1 { get; set; }
+        public Kategory ProductCategory1 { get; set; }
 
         public EditAdminViewModel(PageService pageService, ProductService productService)
         {
@@ -60,8 +60,8 @@ namespace mvvm.ViewModels
                 ProductDiscountAmount = Product.ProductDiscountAmount;
                 ProductQuantityInStock = Product.ProductQuantityInStock;
 
-                List<int> Manufacturers = _productService.getAllManufacrurers();
-                List<int> Categories = _productService.getAllCategories();
+                List<Manufacturer> Manufacturers = _productService.getAllManufacrurers();   
+                List<Kategory> Categories = _productService.getAllCategories();
 
 
                 ProductStatus = new List<string> { ("уп."), ("шт.") };
@@ -69,14 +69,14 @@ namespace mvvm.ViewModels
                 ProductManufacturer = Manufacturers;
 
                 ProductStatus1 = Product.ProductStatus;
-                ProductManufacturer1 = Product.ProductManufacturer;
-                ProductCategory1 = Product.ProductCategory;
+                ProductManufacturer1 = Product.ProductManufacturerNavigation;
+                ProductCategory1 = Product.ProductCategoryNavigation;
             }
             else
             {
                 TextHead = "Добавление нового продукта";
-                List<int> Manufacturers = _productService.getAllManufacrurers();
-                List<int> Categories = _productService.getAllCategories();
+                List<Manufacturer> Manufacturers = _productService.getAllManufacrurers();
+                List<Kategory> Categories = _productService.getAllCategories();
 
 
                 
@@ -102,9 +102,9 @@ namespace mvvm.ViewModels
         {
             Product.ProductName = ProductName;
             Product.ProductDescription = ProductDescription;
-            Product.ProductCategory = ProductCategory1;
+            Product.ProductCategory = ProductCategory1.Idkategory;
             Product.ProductPhoto = ProductPhoto;
-            Product.ProductManufacturer = ProductManufacturer1;
+            Product.ProductManufacturer = ProductManufacturer1.IdManufacturer;
             Product.ProductCost = ProductCost;
             Product.ProductDiscountAmount = ProductDiscountAmount;
             Product.ProductQuantityInStock = ProductQuantityInStock;
@@ -128,9 +128,9 @@ namespace mvvm.ViewModels
             Product.ProductArticleNumber = ProductArticleNumber;
             Product.ProductName = ProductName;
             Product.ProductDescription = ProductDescription;
-            Product.ProductCategory = ProductCategory1;
+            Product.ProductCategory = ProductCategory1.Idkategory;
             Product.ProductPhoto = ProductPhoto;
-            Product.ProductManufacturer = ProductManufacturer1;
+            Product.ProductManufacturer = ProductManufacturer1.IdManufacturer;
             Product.ProductCost = ProductCost;
             Product.ProductDiscountAmount = ProductDiscountAmount;
             Product.ProductQuantityInStock = ProductQuantityInStock;

@@ -264,9 +264,9 @@ namespace mvvm.Services
             return _tradeContext.Products.ToObservableCollection<Product>();
         }
 
-        public List<int> getAllCategories()
+        public List<Kategory> getAllCategories()
         {
-            return _tradeContext.Kategories.Select(i => i.Idkategory).ToList();
+            return _tradeContext.Kategories.ToList();
         }
 
         public int getMaxCategorie()
@@ -279,11 +279,15 @@ namespace mvvm.Services
             return _tradeContext.Manufacturers.Max(i => i.IdManufacturer);
         }
 
-        public List<int> getAllManufacrurers()
+        public List<Manufacturer> getAllManufacrurers()
         {
-            return _tradeContext.Manufacturers.Select(i => i.IdManufacturer).ToList();
+            return _tradeContext.Manufacturers.ToList();
         }
 
+        //public List<Manufacturer> getRealManufacture(int idManufacture)
+        //{
+        //    return _tradeContext.Manufacturers.Where(i => i.IdManufacturer == idManufacture).ToListAsync();
+        //}
 
         public async Task<List<Kategory>> getAllCategoriesObjects()
         {
