@@ -5,6 +5,8 @@
         private readonly PageService _pageService;
         private readonly ProductService _productService;
 
+        public Visibility VisibilityOrderDeliveryDate { get; set; }
+        public DateTime SelectedOrderDeliveryDate { get; set; }
         public List<string> Sorts { get; set; } = new() {
             "По возрастанию",
             "По убыванию"
@@ -51,6 +53,7 @@
 
         public BrowseAdminViewModel(PageService pageService, ProductService productService)
         {
+            VisibilityOrderDeliveryDate = Visibility.Hidden;
             _pageService = pageService;
             _productService = productService;
             SelectedFilter = "Все диапазоны";
@@ -104,6 +107,26 @@
             Settings.Default.RoleName = string.Empty;
             _pageService.ChangePage(new SingInPage());
         });
+
+        
+
+        public DelegateCommand EditDateOrderDeliveryCommand => new(() =>
+        {
+            VisibilityOrderDeliveryDate = Visibility.Visible;
+            DateOnly date = SelectedOrder.OrderDeliveryDate;
+            SelectedOrderDeliveryDate = date.ToDateTime(new TimeOnly());
+        });
+
+        public DelegateCommand EditDate => new(async () =>
+        {
+            if (SelectedOrder == null)
+                return;
+            await _productService.saveNewDate(SelectedOrderDeliveryDate, SelectedOrder, Orders);
+            VisibilityOrderDeliveryDate = Visibility.Hidden;
+
+        });
+        
+
 
         public DelegateCommand HelpCommand => new(() =>
         {

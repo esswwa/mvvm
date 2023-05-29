@@ -148,6 +148,17 @@ namespace mvvm.Services
             await _tradeContext.SaveChangesAsync();
         }
 
+        public async Task saveNewDate(DateTime selectedDate, Orderuser SelectedOrder, ObservableCollection<Orderuser> Orders)
+        {
+            var item = Orders.First(i => i.OrderId == SelectedOrder.OrderId);
+            var index = Orders.IndexOf(item);
+            item.OrderDeliveryDate = DateOnly.FromDateTime(selectedDate);
+            Orders.RemoveAt(index);
+            Orders.Insert(index, item);
+            await _tradeContext.SaveChangesAsync();
+        }
+
+
         public async Task redactProduct(Product SelectedProduct, ObservableCollection<Product> Products)
         {
             var item = Products.First(i => i.ProductArticleNumber == SelectedProduct.ProductArticleNumber);

@@ -102,7 +102,12 @@
             </Grid>
 
             <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
                 <ListView FontFamily="{StaticResource pwsFont}"
+                      Grid.Column="0"
                       ItemsSource="{Binding Orders,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedOrder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       HorizontalContentAlignment="Stretch"
@@ -113,17 +118,12 @@
                     <ContextMenu>
                         <MenuItem Header="Подтвердить завершение заказа"
                                       Command="{Binding EditOrderCommand}"/>
+                        <MenuItem Header="Редактировать дату прибытия заказа"
+                                      Command="{Binding EditDateOrderDeliveryCommand}"/>
                     </ContextMenu>
                 </ListView.ContextMenu>
 
-                <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <UniformGrid Columns="2">
-                            </UniformGrid>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-
-                    <ListView.ItemTemplate>
+                <ListView.ItemTemplate>
                         <DataTemplate>
                         <materialDesign:Card Background="{Binding Converter={StaticResource StringToBrushConverter}}"
                                              Padding="8"
@@ -132,6 +132,8 @@
                             <Grid Grid.Column="1"
                                       VerticalAlignment="Center">
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition Height="auto"/>
@@ -165,12 +167,30 @@
                                 <TextBlock Grid.Row="7"
                                                Text="{Binding OrderPickupPoint, StringFormat={}Пункт выдачи: {0}}"
                                                TextWrapping="Wrap"/>
-
+                                
                             </Grid>
                         </materialDesign:Card>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                <Grid Grid.Column="1"
+                      Visibility="{Binding VisibilityOrderDeliveryDate}"
+                      Margin="15">
+                      <Grid.RowDefinitions>
+                          <RowDefinition Height="Auto"/>
+                          <RowDefinition Height="Auto"/>
+                      </Grid.RowDefinitions>
+                            <DatePicker SelectedDate="{Binding SelectedOrderDeliveryDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Margin="0 0 0 5"
+                                        Grid.Row="0"
+                                        materialDesign:HintAssist.Hint="Новая дата доставки"
+                                        SelectedDateFormat="Short"/>
+                            <Button 
+                                    Content="Редактировать дату"
+                                    Foreground="White"
+                                    Grid.Row="1"
+                                    Command="{Binding EditDate}"/>
+                      </Grid>
             </Grid>
         </Grid>
 </Page>
