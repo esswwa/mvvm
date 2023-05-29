@@ -30,14 +30,14 @@
                      FontFamily="Arial"
                      VerticalContentAlignment="Bottom"
                      materialDesign:TextFieldAssist.HasClearButton="True"
-                     materialDesign:HintAssist.Hint="Поиск"
+                     materialDesign:HintAssist.Hint="Поиск для продуктов"
 
                      Text="{Binding Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <ComboBox Grid.Column="1"
                       Margin="5"
                       Foreground="#76e383"
                       VerticalAlignment="Bottom"
-                      materialDesign:HintAssist.Hint="Сортировка"
+                      materialDesign:HintAssist.Hint="Сортировка для продуктов"
                       Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                       ItemsSource="{Binding Sorts}"
                       SelectedItem="{Binding SelectedSort}"/>
@@ -45,7 +45,7 @@
                       Margin="5"
                       Foreground="#76e383"
                       VerticalAlignment="Bottom"
-                      materialDesign:HintAssist.Hint="Фильтр"
+                      materialDesign:HintAssist.Hint="Фильтр для продуктов"
                       Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                       ItemsSource="{Binding Filters}"
                       SelectedItem="{Binding SelectedFilter}"/>
