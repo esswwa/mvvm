@@ -167,6 +167,7 @@ namespace mvvm.ViewModels
                 await _productService.editManufature(idManufacture, Manufacture, Manufacturers1);
                 VisibilityManufacture = Visibility.Hidden;
             }
+            UpdateProduct();
         });
 
         public DelegateCommand AddCategorieTrue => new(async () =>
@@ -182,6 +183,7 @@ namespace mvvm.ViewModels
                 await _productService.editCategorie(idCategorie, Categorie, Categories1);
                 VisibilityCategorie = Visibility.Hidden;
             }
+            UpdateProduct();
         });
 
 
