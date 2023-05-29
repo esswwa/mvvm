@@ -168,6 +168,11 @@ namespace mvvm.ViewModels
                 VisibilityManufacture = Visibility.Hidden;
             }
             UpdateProduct();
+        }, bool () =>
+        {
+            if (string.IsNullOrWhiteSpace(Manufacture))
+                return false;
+            return true;
         });
 
         public DelegateCommand AddCategorieTrue => new(async () =>
@@ -184,6 +189,11 @@ namespace mvvm.ViewModels
                 VisibilityCategorie = Visibility.Hidden;
             }
             UpdateProduct();
+        }, bool () =>
+        {
+            if (string.IsNullOrWhiteSpace(Categorie))
+                return false;
+            return true;
         });
 
 

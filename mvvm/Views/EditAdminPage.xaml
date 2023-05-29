@@ -11,18 +11,12 @@
       Source = {StaticResource ViewModelLocator}}"
       Title="EditAdminPage">
     <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.05*"/>
-            <RowDefinition/>
-            <RowDefinition Height="0.05*"/>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition/>
             <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="1"
-              Grid.Column="1">
+        <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -35,62 +29,68 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <TextBox Grid.Row="0"
+            <TextBlock Grid.Row="0"
+                       Text="{Binding TextHead, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                       FontSize="24"
+                       HorizontalAlignment="Center"
+                       Margin="0 0 0 20"/>
+            <TextBox Grid.Row="1"
                      Text="{Binding ProductArticleNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      materialDesign:HintAssist.Hint="Артикль"
                      Margin="0 0 0 5"/>
-            <TextBox Grid.Row="1"
+            <TextBox Grid.Row="2"
                      Text="{Binding ProductName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      materialDesign:HintAssist.Hint="Название"
                      TextWrapping="Wrap"
                      Margin="0 0 0 5"/>
-            <TextBox Grid.Row="2"
+            <TextBox Grid.Row="3"
                      Text="{Binding ProductDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      materialDesign:HintAssist.Hint="Описание"
                      TextWrapping="Wrap"
                      Margin="0 0 0 5"/>
             <ComboBox
-                    Grid.Row="3"
+                    Grid.Row="4"
                     materialDesign:HintAssist.Hint="Категории"
                     materialDesign:TextFieldAssist.HasClearButton="True"
                     ItemsSource="{Binding ProductCategory}"
                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
                     SelectedItem="{Binding ProductCategory1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     Margin="0 0 0 5"/>
-            <TextBox Grid.Row="4"
+            <TextBox Grid.Row="5"
                      Text="{Binding ProductPhoto, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      materialDesign:HintAssist.Hint="Изображение"
                      Margin="0 0 0 5"/>
             <ComboBox
-                    Grid.Row="5"
+                    Grid.Row="6"
                     materialDesign:HintAssist.Hint="Производитель"
                     materialDesign:TextFieldAssist.HasClearButton="True"
                     ItemsSource="{Binding ProductManufacturer}"
                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
                     SelectedItem="{Binding ProductManufacturer1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     Margin="0 0 0 5"/>
-            <TextBox Grid.Row="6"
+            <TextBox Grid.Row="7"
                      Text="{Binding ProductCost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      materialDesign:HintAssist.Hint="Стоимость"
                      Margin="0 0 0 5"/>
-            <TextBox Grid.Row="7"
+            <TextBox Grid.Row="8"
                      Text="{Binding ProductDiscountAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      materialDesign:HintAssist.Hint="Скидка"
                      Margin="0 0 0 5"/>
-            <TextBox Grid.Row="8"
+            <TextBox Grid.Row="9"
                      Text="{Binding ProductQuantityInStock, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      materialDesign:HintAssist.Hint="Количество на складе"
                      Margin="0 0 0 5"/>
             <ComboBox
-                    Grid.Row="9"
+                    Grid.Row="10"
                     materialDesign:HintAssist.Hint="Статус"
                     materialDesign:TextFieldAssist.HasClearButton="True"
                     ItemsSource="{Binding ProductStatus}"
                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
                     SelectedItem="{Binding ProductStatus1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     Margin="0 0 0 5"/>
-            <StackPanel Grid.Row="10"
+            <StackPanel Grid.Row="11"
                         Orientation="Horizontal">
                 <Button Content="Назад"
                         Foreground="White"

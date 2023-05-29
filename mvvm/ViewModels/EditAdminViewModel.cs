@@ -27,6 +27,8 @@ namespace mvvm.ViewModels
 
         public string ProductPhoto { get; set; }
 
+        public string TextHead { get; set; }
+
         public List<int> ProductManufacturer { get; set; }
 
         public float ProductCost { get; set; }
@@ -48,6 +50,7 @@ namespace mvvm.ViewModels
             Products = _productService.getAllProd();
             if (ProductModel.products != null)
             {
+                TextHead = "Редактирование продукта";
                 Product = _productService.getProd(ProductModel.products);
                 ProductArticleNumber = Product.ProductArticleNumber;
                 ProductName = Product.ProductName;
@@ -71,6 +74,7 @@ namespace mvvm.ViewModels
             }
             else
             {
+                TextHead = "Добавление нового продукта";
                 List<int> Manufacturers = _productService.getAllManufacrurers();
                 List<int> Categories = _productService.getAllCategories();
 

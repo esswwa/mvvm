@@ -124,6 +124,11 @@
             await _productService.saveNewDate(SelectedOrderDeliveryDate, SelectedOrder, Orders);
             VisibilityOrderDeliveryDate = Visibility.Hidden;
 
+        }, bool () =>
+        {
+            if (string.IsNullOrWhiteSpace(SelectedOrderDeliveryDate.ToString()))
+                return false;
+            return true;
         });
         
 
